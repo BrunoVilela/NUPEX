@@ -1,16 +1,18 @@
 Package: NUPEX
-Title: What the Package Does (One Line, Title Case)
+Title: Analysis of academic output from lattes plataform and other sources
 Version: 0.0.0.9000
 Authors@R: 
-    person(given = "First",
-           family = "Last",
+    person(given = "Bruno",
+           family = "Vilela",
            role = c("aut", "cre"),
-           email = "first.last@example.com",
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
+           email = "bruno.vilela@ufba.br",
+           comment = c(ORCID = "0000-0003-4072-0558"))
+Description: Harnesing data from lattes plataform and perform analysis of the outputs
 License: `use_mit_license()`, `use_gpl3_license()` or friends to
     pick a license
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
+URL: https://github.com/BrunoVilela/NUPEX
+BugReports: https://github.com/BrunoVilela/NUPEX/issues
