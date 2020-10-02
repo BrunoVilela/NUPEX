@@ -40,3 +40,12 @@ path_lattes <- paste0(system.file("lattes",
 # Run the main function to obtain all lattes data into a list of tables
 lattes_data <- get_lattes(path_lattes)
 ```
+
+This is an example to obtain lattes data from multiple XMLs:
+
+``` r
+# Path to the XMLs files
+path_lattes_folder <- system.file("lattes", package = "NUPEX")
+# Run the main function to obtain all lattes data into a list of tables
+lattes_data_multiple <- get_lattes_folder(path_lattes_folder)
+```

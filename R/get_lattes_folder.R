@@ -3,7 +3,7 @@
 #' It summarizes multiple XML lattes data into a list of tables
 #' (in tibble format) separated by the type of information.
 #'
-#' @param file the path of the folder containing the XML files obtained from the lattes plataform
+#' @param folder_path the path of the folder containing the XML files obtained from the lattes plataform
 #'
 #' @return A list of tibbles
 #'
