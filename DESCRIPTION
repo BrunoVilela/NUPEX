@@ -7,12 +7,22 @@ Authors@R:
            role = c("aut", "cre"),
            email = "bruno.vilela@ufba.br",
            comment = c(ORCID = "0000-0003-4072-0558"))
-Description: Harnesing data from lattes plataform and perform analysis of the outputs
-License: `use_mit_license()`, `use_gpl3_license()` or friends to
-    pick a license
+Description: The goal of NUPEX package is to help with analysis of academic output from the Brazilian lattes plataform and from other admistrative sources.
+License: GPL-3
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
 URL: https://github.com/BrunoVilela/NUPEX
 BugReports: https://github.com/BrunoVilela/NUPEX/issues
+Suggests: 
+    covr,
+    testthat,
+    spelling
+Language: en-US
+Imports: 
+    XML,
+    plyr,
+    dplyr,
+    tibble,
+    ggplot2
