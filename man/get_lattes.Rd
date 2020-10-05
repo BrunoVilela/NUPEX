@@ -7,7 +7,7 @@
 get_lattes(file)
 }
 \arguments{
-\item{file}{the name of XML file obtained from the lattes plataform}
+\item{file}{the name of XML file obtained from the lattes platform}
 }
 \value{
 A list of tibbles

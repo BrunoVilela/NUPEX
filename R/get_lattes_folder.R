@@ -3,7 +3,8 @@
 #' It summarizes multiple XML lattes data into a list of tables
 #' (in tibble format) separated by the type of information.
 #'
-#' @param folder_path the path of the folder containing the XML files obtained from the lattes plataform
+#' @param folder_path the path of the folder containing the XML files obtained from the lattes platform
+#' @param progress if TRUE, progress bar is shown
 #'
 #' @return A list of tibbles
 #'
@@ -14,12 +15,14 @@
 #' @export
 #'
 
-get_lattes_folder <- function(folder_path) {
+get_lattes_folder <- function(folder_path, progress = TRUE) {
   xmls <- list.files(folder_path, ".xml", full.names = TRUE)
+  n_lattes <- length(xmls)
+  pb <- utils::txtProgressBar(min = 1, max = n_lattes, style = 3)
   temp <- get_lattes(xmls[1])
   nome <- temp[[1]]$`NOME-COMPLETO`
   list_lattes <- sapply(temp, .add_names, y = nome)
-  n_lattes <- length(xmls)
+  utils::setTxtProgressBar(pb, 1)
   if (n_lattes > 1) {
     for (i in 2:n_lattes) {
       temp <- get_lattes(xmls[i])
@@ -29,6 +32,10 @@ get_lattes_folder <- function(folder_path) {
       temp3 <- plyr::rbind.fill(as.data.frame(list_lattes[[j]]),
                                              as.data.frame(temp2[[j]]))
       list_lattes[[j]] <- tibble::as_tibble(temp3)
+
+      }
+      if (progress) {
+        utils::setTxtProgressBar(pb, i)
       }
     }
   }

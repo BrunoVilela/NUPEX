@@ -12,9 +12,11 @@
       autores <- names(paper[[i]]) == "AUTORES"
       autor <- NULL
       nome <- xmls_list$`DADOS-GERAIS`$.attrs[1]
+      citas <- strsplit(xmls_list$`DADOS-GERAIS`$.attrs[2], ";")[[1]]
       n_autores <- sum(autores)
       for (j in which(autores)) {
-        if (paper[[i]][[j]][1] == nome) {
+        if (paper[[i]][[j]][1] == nome |
+            paper[[i]][[j]][2] %in%  citas) { # MUDAR NOME PARA CODIGO
           posicao_autoria <- paper[[i]][[j]][3]
         }
       }

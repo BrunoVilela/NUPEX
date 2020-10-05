@@ -3,7 +3,7 @@
 #' It summarizes individual XML lattes data into a list of tables
 #' (in tibble format) separated by the type of information.
 #'
-#' @param file the name of XML file obtained from the lattes plataform
+#' @param file the name of XML file obtained from the lattes platform
 #'
 #' @return A list of tibbles
 #'
