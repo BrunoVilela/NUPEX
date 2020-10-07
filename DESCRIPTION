@@ -25,4 +25,6 @@ Imports:
     plyr,
     dplyr,
     tibble,
-    ggplot2
+    ggplot2,
+    magrittr,
+    stringr

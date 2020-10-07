@@ -2,3 +2,5 @@
 
 export(get_lattes)
 export(get_lattes_folder)
+export(summary_all)
+importFrom(magrittr,"%>%")
