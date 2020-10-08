@@ -102,9 +102,7 @@ summary_courses <- function(x, N) {
 #----------------------------------- COURSES
 summary_address <- function(x) {
   n_uni <- length(unique(x$ENDERECO.PROFISSIONAL.CODIGO.INSTITUICAO.EMPRESA))
-  n_dept <- length(unique(x$ENDERECO.PROFISSIONAL.NOME.ORGAO))
-  return(list("Number of universities" = n_uni,
-              "Number of departaments" = n_dept))
+  return(list("Number of universities" = n_uni))
 }
 
 

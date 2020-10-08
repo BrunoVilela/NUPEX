@@ -1,0 +1,10 @@
+test_that("summary_all works", {
+  path_lattes <- system.file("lattes", package = "NUPEX")
+  lattes_data <- get_lattes_folder(path_lattes)
+  summary_lattes <- summary_all(lattes_data)
+  expect_equal(class(summary_lattes), "list")
+  classes1 <- sapply(summary_lattes, tibble::is_tibble)
+  classes2 <- sapply(summary_lattes, is.null)
+  classes3 <- sapply(summary_lattes, is.numeric)
+  expect_true(all(classes1 | classes2 | classes3))
+})
