@@ -369,8 +369,8 @@ summary_patent <- function(x, N) {
     N_artigos <- 0
     mean_artigos <- 0
   }
-  return(list("Total number of unique software" = N_artigos,
-              "Mean number of software per person" = mean_artigos))
+  return(list("Total number of unique patent" = N_artigos,
+              "Mean number of patent per person" = mean_artigos))
 }
 
 #----------------------------------- Technical work

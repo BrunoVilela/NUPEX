@@ -18,7 +18,7 @@ It summarizes individual XML lattes data into a list of tables
 }
 \examples{
 path_lattes <- paste0(system.file("lattes", package = "NUPEX"),
- "/lattes1.xml")
+ "/lattes4.xml")
 lattes_data <- get_lattes(path_lattes)
 
 }

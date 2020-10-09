@@ -12,7 +12,7 @@ get_projects <- function(xmls_list) {
       names(x) <- paste0(names(x), round(stats::runif(1), 2));x})
 
 
-  if (is.null(paper)) {
+  if (is.null(paper) | length(paper) == 0) {
     return(NULL)
   } else {
     n_papers <- length(paper)

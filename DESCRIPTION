@@ -27,4 +27,5 @@ Imports:
     tibble,
     ggplot2,
     magrittr,
-    stringr
+    stringr,
+    rAltmetric

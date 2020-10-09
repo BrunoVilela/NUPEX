@@ -10,7 +10,7 @@
 #' @return list of tibbles filtered by the specified year
 #'
 #' @examples
-#' folder_path <- system.file("CVs", package = "NUPEX")
+#' folder_path <- system.file("lattes", package = "NUPEX")
 #' lattes_folder_data <- get_lattes_folder(folder_path)
 #' lattes_filtered <- filter_year(lattes_folder_data, year = 2020)
 #' summary_lattes <- summary_all(lattes_filtered)
@@ -45,7 +45,8 @@ filter_year <- function(lattes_data, year) {
     }
   }
   if (!is.null(anos$supervision_ongoing)) {
-    tibble::add_column(anos$supervision_ongoing,
+    anos$supervision_ongoing <-
+      tibble::add_column(anos$supervision_ongoing,
                        ANO.FIM = NA)
   }
 
@@ -75,8 +76,9 @@ aux_filter_year <- function(x, y, year) {
 
       years_seq <- apply(y, 1, function(x)x[1]:x[2])
       pos <- sapply(years_seq, function(z, k)k%in%z, k = year)
+    } else {
+      pos <- as.numeric(y[[1]]) == year
     }
-    pos <- as.numeric(y[[1]]) == year
     x <- x[pos, ]
     return(x)
   } else {

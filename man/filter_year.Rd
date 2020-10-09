@@ -22,7 +22,7 @@ The function will not filter education, basic information,
 idioms, and fields of research(areas).
 }
 \examples{
-folder_path <- system.file("CVs", package = "NUPEX")
+folder_path <- system.file("lattes", package = "NUPEX")
 lattes_folder_data <- get_lattes_folder(folder_path)
 lattes_filtered <- filter_year(lattes_folder_data, year = 2020)
 summary_lattes <- summary_all(lattes_filtered)
