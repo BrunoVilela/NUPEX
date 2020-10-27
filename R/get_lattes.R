@@ -9,16 +9,20 @@
 #'
 #' @examples
 #' path_lattes <- paste0(system.file("lattes", package = "NUPEX"),
-#'  "/lattes3.xml")
+#'  "/lattes5.xml")
 #' lattes_data <- get_lattes(path_lattes)
 #'
 #' @export
 #'
 get_lattes <- function(file) {
   # Leia o cv lattes
-  xmls <- XML::xmlParse(file, encoding="UTF_8")
-  xmls_list <- XML::xmlToList(xmls)
-
+  # xmls <- XML::xmlParse(file, encoding = "latin")
+  # xmls_list <- XML::xmlToList(xmls)
+  xmls_list <- XML::xmlToList(XML::xmlTreeParse(file,
+                                   useInternal = TRUE))
+  xmls_list2 <- rapply(xmls_list, function(x){Encoding(x) <- "UTF-8";x},
+                      classes = "character",
+                      how = "replace")
   # Dados básicos
   basic <- get_basic_data(xmls_list)
   idiom <- get_idioms(xmls_list)
