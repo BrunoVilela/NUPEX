@@ -18,11 +18,13 @@ get_lattes <- function(file) {
   # Leia o cv lattes
   # xmls <- XML::xmlParse(file, encoding = "latin")
   # xmls_list <- XML::xmlToList(xmls)
+
   xmls_list <- XML::xmlToList(XML::xmlTreeParse(file,
                                    useInternal = TRUE))
-  xmls_list2 <- rapply(xmls_list, function(x){Encoding(x) <- "UTF-8";x},
+  xmls_list <- rapply(xmls_list, function(x){Encoding(x) <- "UTF-8";x},
                       classes = "character",
                       how = "replace")
+
   # Dados básicos
   basic <- get_basic_data(xmls_list)
   idiom <- get_idioms(xmls_list)
@@ -128,16 +130,16 @@ get_lattes <- function(file) {
       "journal_editor",
       "professional_activity"
     )
-  if(.Platform$OS.type == "unix") {
-  } else {
-    for (i in 1:length(results)) {
-      if (!is.null(results[[i]])) {
-        data.table::fwrite(results[[i]],"temp.csv")
-        results[[i]] <- data.table::fread("temp.csv",encoding = "Latin-1")
-        results[[i]] <- tibble::as_tibble(results[[i]])
-        file.remove("temp.csv")
-      }
-    }
-  }
+  # if(.Platform$OS.type == "unix") {
+  # } else {
+  #   for (i in 1:length(results)) {
+  #     if (!is.null(results[[i]])) {
+  #       data.table::fwrite(results[[i]], "temp.csv")
+  #       results[[i]] <- data.table::fread("temp.csv", encoding = "Latin-1")
+  #       results[[i]] <- tibble::as_tibble(results[[i]])
+  #       file.remove("temp.csv")
+  #     }
+  #   }
+  # }
   return(results)
 }
