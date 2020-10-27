@@ -21,7 +21,7 @@ knitr::opts_chunk$set(
 [![Codecov test coverage](https://codecov.io/gh/BrunoVilela/NUPEX/branch/master/graph/badge.svg)](https://codecov.io/gh/BrunoVilela/NUPEX?branch=master)
 <!-- badges: end -->
 
-The goal of NUPEX package is to help with analysis of academic output from the Brazilian lattes plataform and from other admistrative sources.
+The goal of NUPEX package is to help with analysis of academic output from the Brazilian lattes platform and from other administrative sources.
 
 ## Installation
 
@@ -35,7 +35,7 @@ devtools::install_github("BrunoVilela/NUPEX")
 
 This is a basic example of how to obtain all data from a lattes XML file:
 
-```{r example}
+```{r example, eval = FALSE}
 library(NUPEX)
 # Path to the XML file
 path_lattes <- paste0(system.file("lattes", 
@@ -46,7 +46,7 @@ lattes_data <- get_lattes(path_lattes)
 ```
 
 This is an example to obtain lattes data from multiple XMLs:
-```{r example2}
+```{r example2, eval = FALSE}
 # Path to the XMLs files
 path_lattes_folder <- system.file("lattes", package = "NUPEX")
 # Run the main function to obtain all lattes data into a list of tables

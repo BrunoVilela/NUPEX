@@ -16,7 +16,7 @@
       citas <- tolower(strsplit(xmls_list$`DADOS-GERAIS`$.attrs[2], ";")[[1]])
       citas <- stringi::stri_trans_general(citas, "Latin-ASCII")
       n_autores <- sum(autores)
-      posicao_autoria <- "Não identificado"
+      posicao_autoria <- "Nao identificado"
       for (j in which(autores)) {
         nomej <- tolower(paper[[i]][[j]][1])
         nomej <- stringi::stri_trans_general(nomej, "Latin-ASCII")

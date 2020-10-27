@@ -15,7 +15,7 @@ filter_year(lattes_data, year)
 list of tibbles filtered by the specified year
 }
 \description{
-It filters the data obtained from get_lattes_folder to a user speficified year
+It filters the data obtained from get_lattes_folder to a user specified year
 }
 \details{
 The function will not filter education, basic information,

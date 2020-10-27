@@ -14,7 +14,8 @@ coverage](https://codecov.io/gh/BrunoVilela/NUPEX/branch/master/graph/badge.svg)
 <!-- badges: end -->
 
 The goal of NUPEX package is to help with analysis of academic output
-from the Brazilian lattes plataform and from other admistrative sources.
+from the Brazilian lattes platform and from other administrative
+sources.
 
 ## Installation
 
@@ -48,4 +49,5 @@ This is an example to obtain lattes data from multiple XMLs:
 path_lattes_folder <- system.file("lattes", package = "NUPEX")
 # Run the main function to obtain all lattes data into a list of tables
 lattes_data_multiple <- get_lattes_folder(path_lattes_folder)
+#>   |                                                                              |                                                                      |   0%  |                                                                              |==================                                                    |  25%  |                                                                              |===================================                                   |  50%  |                                                                              |====================================================                  |  75%  |                                                                              |======================================================================| 100%
 ```

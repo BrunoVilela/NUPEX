@@ -1,6 +1,6 @@
 #' Filter the year of lattes information
 #'
-#' It filters the data obtained from get_lattes_folder to a user speficified year
+#' It filters the data obtained from get_lattes_folder to a user specified year
 #'
 #' @param lattes_data output result from get_lattes_folder function.
 #' @param year the year to filter the data for.
