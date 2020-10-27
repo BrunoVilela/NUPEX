@@ -11,12 +11,19 @@
       # Autoria
       autores <- names(paper[[i]]) == "AUTORES"
       autor <- NULL
-      nome <- xmls_list$`DADOS-GERAIS`$.attrs[1]
-      citas <- strsplit(xmls_list$`DADOS-GERAIS`$.attrs[2], ";")[[1]]
+      nome <- tolower(xmls_list$`DADOS-GERAIS`$.attrs[1])
+      nome <- stringi::stri_trans_general(nome, "Latin-ASCII")
+      citas <- tolower(strsplit(xmls_list$`DADOS-GERAIS`$.attrs[2], ";")[[1]])
+      citas <- stringi::stri_trans_general(citas, "Latin-ASCII")
       n_autores <- sum(autores)
+      posicao_autoria <- "Não identificado"
       for (j in which(autores)) {
-        if (paper[[i]][[j]][1] == nome |
-            paper[[i]][[j]][2] %in%  citas) { # MUDAR NOME PARA CODIGO
+        nomej <- tolower(paper[[i]][[j]][1])
+        nomej <- stringi::stri_trans_general(nomej, "Latin-ASCII")
+        citaj <- tolower(paper[[i]][[j]][2])
+        citaj <- stringi::stri_trans_general(citaj, "Latin-ASCII")
+        if (nomej == nome |
+            citaj %in%  citas) { # MUDAR NOME PARA CODIGO
           posicao_autoria <- paper[[i]][[j]][3]
         }
       }

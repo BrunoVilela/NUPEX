@@ -28,4 +28,5 @@ Imports:
     ggplot2,
     magrittr,
     stringr,
-    rAltmetric
+    rAltmetric,
+    stringi

@@ -9,7 +9,7 @@
 #'
 #' @examples
 #' path_lattes <- paste0(system.file("lattes", package = "NUPEX"),
-#'  "/lattes4.xml")
+#'  "/lattes3.xml")
 #' lattes_data <- get_lattes(path_lattes)
 #'
 #' @export
