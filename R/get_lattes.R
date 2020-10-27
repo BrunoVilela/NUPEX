@@ -128,5 +128,16 @@ get_lattes <- function(file) {
       "journal_editor",
       "professional_activity"
     )
+  if(.Platform$OS.type == "unix") {
+  } else {
+    for (i in 1:length(results)) {
+      if (!is.null(results[[i]])) {
+        data.table::fwrite(results[[i]],"temp.csv")
+        results[[i]] <- data.table::fread("temp.csv",encoding = "Latin-1")
+        results[[i]] <- tibble::as_tibble(results[[i]])
+        file.remove("temp.csv")
+      }
+    }
+  }
   return(results)
 }

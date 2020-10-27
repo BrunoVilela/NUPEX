@@ -29,4 +29,5 @@ Imports:
     magrittr,
     stringr,
     rAltmetric,
-    stringi
+    stringi,
+    data.table
