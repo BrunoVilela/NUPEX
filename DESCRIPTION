@@ -7,7 +7,7 @@ Authors@R:
            role = c("aut", "cre"),
            email = "bruno.vilela@ufba.br",
            comment = c(ORCID = "0000-0003-4072-0558"))
-Description: The goal of NUPEX package is to help with analysis of academic output from the Brazilian lattes plataform and from other administrative sources.
+Description: The goal of NUPEX package is to help with analysis of academic output from the Brazilian lattes platform and from other administrative sources.
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
