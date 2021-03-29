@@ -75,9 +75,9 @@ aux_filter_year <- function(x, y, year) {
                             year_num)
 
       years_seq <- apply(y, 1, function(x)x[1]:x[2])
-      pos <- sapply(years_seq, function(z, k)k%in%z, k = year)
+      pos <- sapply(years_seq, function(z, k)any(k%in%z), k = year)
     } else {
-      pos <- as.numeric(y[[1]]) == year
+      pos <- as.numeric(y[[1]]) %in% year
     }
     x <- x[pos, ]
     return(x)

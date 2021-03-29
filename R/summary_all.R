@@ -67,7 +67,7 @@ summary_basic <- function(x) {
 summary_education <- function(x) {
   suppressMessages(NIVEL_max <- x %>%
                      dplyr::group_by(NOME) %>%
-                     dplyr::filter(!NIVEL %in% c("X", "C", 6:100)) %>%
+                     dplyr::filter(!NIVEL %in% c("X", "C", "B", 6:100)) %>%
                      dplyr::summarize(nivel = max(NIVEL)))
   NIVEL_max$nivel[NIVEL_max$nivel == "5"] <- "Postdoc"
   NIVEL_max$nivel[NIVEL_max$nivel == "4"] <- "PhD"
