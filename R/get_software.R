@@ -21,13 +21,16 @@ get_software <- function(xmls_list) {
     }
     cols <- names(resultado)
     dups <- cols[duplicated(cols)]
-    for (i in 1:length(dups)) {
-      qual <- which(cols %in% dups[i])
-      temp <- resultado[, qual]
-      resultado[, qual[1]] <- ifelse(is.na(temp[, 1]), temp[, 2],
-                                               temp[, 1])
+    n <- length(dups)
+    if (n != 0) {
+      for (i in 1:n) {
+        qual <- which(cols %in% dups[i])
+        temp <- resultado[, qual]
+        resultado[, qual[1]] <- ifelse(is.na(temp[, 1]), temp[, 2],
+                                       temp[, 1])
+      }
+      resultado <- resultado[,!duplicated(cols)]
     }
-    resultado <- resultado[, !duplicated(cols)]
     return(tibble::as_tibble(resultado))
   }
 }
