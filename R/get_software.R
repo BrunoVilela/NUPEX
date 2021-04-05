@@ -1,5 +1,5 @@
 get_software <- function(xmls_list) {
-  
+
   paper <- xmls_list$`PRODUCAO-TECNICA`
   paper <- paper[names(paper) == "SOFTWARE"]
   if (is.null(paper) | length(paper) == 0) {
@@ -19,6 +19,15 @@ get_software <- function(xmls_list) {
       colnames(resultado) <- gsub(remover_nomes[i], "", colnames(resultado))
       colnames(resultado) <- gsub(remover_nomes2[i], "", colnames(resultado))
     }
+    cols <- names(resultado)
+    dups <- cols[duplicated(cols)]
+    for (i in 1:length(dups)) {
+      qual <- which(cols %in% dups[i])
+      temp <- resultado[, qual]
+      resultado[, qual[1]] <- ifelse(is.na(temp[, 1]), temp[, 2],
+                                               temp[, 1])
+    }
+    resultado <- resultado[, !duplicated(cols)]
     return(tibble::as_tibble(resultado))
   }
 }
