@@ -7,3 +7,4 @@ test_that("get_lattes_folder works", {
   classes2 <- sapply(lattes_data, is.null)
   expect_true(all(classes1 | classes2))
 })
+#.
