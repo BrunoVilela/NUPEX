@@ -45,6 +45,12 @@ get_lattes_folder <- function(folder_path, progress = TRUE) {
       }
     }
   }
+
+  # Standartizing titles of published studies and names of scientific journals
+  list_lattes <- std_titles(list_lattes)
+  list_lattes <- adjust_journ(list_lattes)
+
+
   return(list_lattes)
 }
 
