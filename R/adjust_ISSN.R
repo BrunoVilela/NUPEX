@@ -1,6 +1,11 @@
 # Auxiliary function for manual adjustments of ISSNs in specific journals
 
-# Author: Domingos Cardoso
+#' @author Domingos Cardoso
+#'
+#' @importFrom tibble add_column
+#'
+#' @export
+#'
 
 adjust_ISSN <- function(papers){
 
@@ -9,7 +14,6 @@ adjust_ISSN <- function(papers){
   papers <- tibble::add_column(papers, ESTRATO = NA, .after = "TITULO.PERIODICO.OU.REVISTA")
   papers$ISSN_temp <- gsub("(?<![0-9])0+", "", papers$ISSN_temp, perl = TRUE)
 
-
   papers$TITULO.PERIODICO.OU.REVISTA <- NA
   papers$ISSN <- gsub("^$", NA, papers$ISSN)
   papers$ISSN <- as.character(papers$ISSN)
@@ -17,7 +21,6 @@ adjust_ISSN <- function(papers){
   papers$ISSN_temp <- gsub("^$", NA, papers$ISSN_temp)
   papers$ESTRATO <- as.character(papers$ESTRATO)
   papers$periodico_temp <- as.character(papers$periodico_temp)
-
 
   # Initial cleaning of journals without ISSN
   jj <- c("Kew Bulletin", "Kew Bull.", "Kew Bull")
@@ -398,4 +401,5 @@ adjust_ISSN <- function(papers){
   }
 
   return(papers)
+
 }

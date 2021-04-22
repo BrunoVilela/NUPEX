@@ -1,13 +1,16 @@
 # Function to correct html codes and typos in titles of published studies in
 # journals, books, dissertations, etc
 
-# Author: Domingos Cardoso
+#' @author Domingos Cardoso
+#'
+#' @importFrom textutils HTMLdecode
+#' @importFrom tools toTitleCase
+#' @importFrom stringi stri_unescape_unicode
+#'
+#' @export
+#'
 
 std_titles <- function(x) {
-
-  require(textutils)
-  require(stringi)
-  require(tools)
 
   # Grabbing all specific columns of titles to be fixed/cleaned
   coltofix <- list()

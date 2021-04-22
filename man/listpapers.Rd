@@ -2,35 +2,45 @@
 % Please edit documentation in R/listpapers.R
 \name{listpapers}
 \alias{listpapers}
-\title{Get list of papers}
+\title{Produce list of papers}
 \usage{
-listpapers(nupexfile, capesfile = NULL, quadre = NULL)
+listpapers(lattesdata, capesdata = NULL, quadre = NULL)
 }
 \arguments{
-\item{nupexfile}{table (tibble format) which will be used to extract
-published and accepted papers as obtained by \code{\link{get_lattes}} or
-\code{\link{get_lattes_folder}}}
+\item{lattesdata}{table (tibble format) derived by \code{\link{get_lattes}} or
+\code{\link{get_lattes_folder}}, that will be used to extract a list of
+published and accepted papers}
 
-\item{capesfile}{a dataframe of journal classification according to CAPES strata}
+\item{capesdata}{data frame of journal classification according to CAPES strata}
 
-\item{quadre}{a vector defing an interval of years to extract the list of papers}
+\item{quadre}{vector defining a time frame of years to extract the list of
+papers; for example, a quadrennium like c(2017, 2020), which is useful for
+CAPES Sucupira report}
 }
 \value{
-A table in dataframe format.
+Table in data frame format
 }
 \description{
-It obtains a dataframe with published and accepted papers from a tibble obtained using
-get_lattes or get_lattes_folder. By proviving a capes file, the function adds
-the classification of each journal by CAPES strata
+It produces a data frame with published and accepted papers from a
+tibble obtained using \code{\link{get_lattes}} or \code{\link{get_lattes_folder}}.
+By providing a capes file, the function adds the classification of each
+journal by CAPES strata.
 }
 \examples{
 \dontrun{
 path_lattes <- paste0(system.file("lattes", package = "NUPEX"),
-                     "/lattes2.xml")
+                      "/lattes2.xml")
 lattes_data <- get_lattes(path_lattes)
 data(capes_qualis)
-lpapers <- listpapers(lattes_data
-                      capesfile = capes_qualis,
+lpapers <- listpapers(lattes_data,
+                      capesdata = capes_qualis,
+                      quadre = c(2017, 2020))
+
+path_lattes_folder <- system.file("lattes", package = "NUPEX")
+lattes_folder_data <- get_lattes_folder(path_lattes_folder)
+data(capes_qualis)
+lpapers <- listpapers(lattes_folder_data,
+                      capesdata = capes_qualis,
                       quadre = c(2017, 2020))
 }
 

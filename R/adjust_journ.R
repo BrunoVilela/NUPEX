@@ -1,15 +1,17 @@
 # Auxiliary function to adjust/standardize names of journals
 
-# Author: Domingos Cardoso
+#' @author Domingos Cardoso
+#'
+#' @importFrom tools toTitleCase
+#'
+#' @export
+#'
 
-adjust_journ <- function (x) {
-
-  require(tools)
+adjust_journ <- function(x) {
 
   if (any(class(x) == "data.frame")) {
     x <- list(x)
     names(x) <- "papers"
-
   }
 
   # Grabbing all specific columns of titles to be fixed/cleaned
@@ -40,7 +42,7 @@ adjust_journ <- function (x) {
 
           for (j in 1:length(which(coltofix[[i]]==T))) {
 
-            x[[i]][[names(x[[i]])[coltofix[[i]]][j]]] <- gsub("2[.][&][#]09;|RBCF[.]\\s|\\s[(].*|[.]$|[:].*",
+            x[[i]][[names(x[[i]])[coltofix[[i]]][j]]] <- gsub("2[.][&][#]09;|RBCF[.]\\s|\\s[(].*|[.]$|[:].*|amp;",
                                                               "", x[[i]][[names(x[[i]])[coltofix[[i]]][j]]])
             x[[i]][[names(x[[i]])[coltofix[[i]]][j]]] <- gsub("M E T A B O L I S M C L I N I C A L A N D E X P E R I M E N T A L",
                                                               "METATOLISM CLINICAL AND EXPERIMENTAL", x[[i]][[names(x[[i]])[coltofix[[i]]][j]]])
@@ -150,4 +152,3 @@ adjust_journ <- function (x) {
 
   return(x)
 }
-
