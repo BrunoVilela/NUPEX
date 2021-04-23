@@ -4,10 +4,10 @@
 \alias{ppgsuperv}
 \title{Produce list of graduate programs where each one contributes with ongoing supervising}
 \usage{
-ppgsuperv(nupexfile, collabs = NULL)
+ppgsuperv(lattesdata, collabs = NULL)
 }
 \arguments{
-\item{nupexfile}{table (tibble format) derived by \code{\link{get_lattes}} or
+\item{lattesdata}{table (tibble format) derived by \code{\link{get_lattes}} or
 \code{\link{get_lattes_folder}}, that will be used to extract a list of
 ongoing supervisions of MSc or PhD students at different graduate programs}
 
@@ -28,7 +28,7 @@ programs where each one contributes with ongoing supervising of MSc or PhD stude
 \dontrun{
 path_lattes <- paste0(system.file("lattes", package = "NUPEX"),
                       "/lattes2.xml")
-lattes_data <- get_lattes_folder(path_lattes)
+lattes_data <- get_lattes(path_lattes)
 ppgs <- ppgsuperv(lattes_data)
 
 path_lattes_folder <- system.file("lattes", package = "NUPEX")

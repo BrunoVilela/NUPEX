@@ -19,7 +19,7 @@
 #' \dontrun{
 #' path_lattes <- paste0(system.file("lattes", package = "NUPEX"),
 #'                       "/lattes2.xml")
-#' lattes_data <- get_lattes_folder(path_lattes)
+#' lattes_data <- get_lattes(path_lattes)
 #' lpats <- listpatents(lattes_data
 #'                      quadre = c(2017, 2020))
 #'
@@ -36,8 +36,8 @@
 #' @export
 #'
 
-listpatents <- function (lattesdata,
-                         quadre = NULL) {
+listpatents <- function(lattesdata,
+                        quadre = NULL) {
 
   l <- length(lattesdata[["patent"]])
   if (l == 0) {
@@ -59,12 +59,14 @@ listpatents <- function (lattesdata,
                             "CATEGORIA",
                             "ANO.DESENVOLVIMENTO",
                             "TITULO",
+                            "FINALIDADE",
                             "PAIS",
+                            "REGISTRO.OU.PATENTE.TIPO.PATENTE",
                             "REGISTRO.OU.PATENTE.CODIGO.DO.REGISTRO.OU.PATENTE",
                             "REGISTRO.OU.PATENTE.INSTITUICAO.DEPOSITO.REGISTRO")
 
-  colnames(lpats)[colnames(lpats) == "REGISTRO.OU.PATENTE.CODIGO.DO.REGISTRO.OU.PATENTE"] <- "CODIGO"
-  colnames(lpats)[colnames(lpats) == "REGISTRO.OU.PATENTE.INSTITUICAO.DEPOSITO.REGISTRO"] <- "INSTITUICAO"
+  colnames(lpats)[colnames(lpats) == "REGISTRO.OU.PATENTE.CODIGO.DO.REGISTRO.OU.PATENTE"] <- "CODIGO.PATENTE"
+  colnames(lpats)[colnames(lpats) == "REGISTRO.OU.PATENTE.INSTITUICAO.DEPOSITO.REGISTRO"] <- "INSTITUICAO.DEPOSITO.REGISTRO"
   colnames(lpats)[colnames(lpats) == "ANO.DESENVOLVIMENTO"] <- "ANO"
 
   lpats <- lpats %>% arrange(NOME, desc(ANO), CATEGORIA)

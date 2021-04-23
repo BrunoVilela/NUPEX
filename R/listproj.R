@@ -19,7 +19,7 @@
 #' \dontrun{
 #' path_lattes <- paste0(system.file("lattes", package = "NUPEX"),
 #'                       "/lattes2.xml")
-#' lattes_data <- get_lattes_folder(path_lattes)
+#' lattes_data <- get_lattes(path_lattes)
 #' lproj <- listproj(lattes_data
 #'                   quadre = c(2017, 2020))
 #'
@@ -90,7 +90,7 @@ listproj <- function(lattesdata,
   if (!is.null(quadre)) {
     baseyear <- quadre[1]
     lastyear <- quadre[2]
-    teste <- lproj %>% filter(ANO.INICIO >= baseyear & ANO.INICIO <= lastyear |
+    lproj <- lproj %>% filter(ANO.INICIO >= baseyear & ANO.INICIO <= lastyear |
                                 ANO.FIM >= baseyear & ANO.FIM <= lastyear |
                                 ANO.INICIO < baseyear & is.na(ANO.FIM))
   }
@@ -98,13 +98,13 @@ listproj <- function(lattesdata,
   # Remove columns from data frame where ALL values are NA
   lproj <- lproj[, colSums(is.na(lproj)) < nrow(lproj)]
 
-  # Using the auxiliary functions coop and replace_coop for deleting columns
+  # Using the auxiliary functions .coop and .replace_coop for deleting columns
   # related to COOPERACAO
   nt <- sapply("COOPERACAO",
                grepl, lproj[, -c(1:11, length(lproj))])
   if (any(nt)) {
-    ag <- coop("COOPERACAO", lproj)
-    lproj <- replace_coop("COOPERACAO", nt, ag, lproj)
+    ag <- .coop("COOPERACAO", lproj)
+    lproj <- .replace_coop("COOPERACAO", nt, ag, lproj)
   }
 
   # Remove again columns from dataframe where ALL values are NA
@@ -138,7 +138,7 @@ listproj <- function(lattesdata,
 # These functions will look at COOPERACAO only within columns related
 # to "FINANCIADOR.PROJETO" and will put NA in both "NATUREZA" and "NOME.INSTITUICAO"
 
-coop <- function(x, y) {
+.coop <- function(x, y) {
   y <- y[, -c(1:11, length(y))]
   g <- sapply(x, grepl, y)
   res <- list()
@@ -148,7 +148,7 @@ coop <- function(x, y) {
   return(res)
 }
 
-replace_coop <- function(x, nt, ag, lproj) {
+.replace_coop <- function(x, nt, ag, lproj) {
   nf <- which(nt == T) - 1
   if (length(ag) == 1) {
     lproj[, -c(1:11, length(lproj))][, nt][ag[[1]]] <- NA

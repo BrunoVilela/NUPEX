@@ -30,7 +30,7 @@ contributing editorial board or referees, from a tibble obtained using
 \dontrun{
 path_lattes <- paste0(system.file("lattes", package = "NUPEX"),
                       "/lattes2.xml")
-lattes_data <- get_lattes_folder(path_lattes)
+lattes_data <- get_lattes(path_lattes)
 data(capes_qualis)
 lpapers <- listpapers(lattes_data,
                       capesdata = capes_qualis,

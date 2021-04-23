@@ -32,11 +32,11 @@ of CAPES journal classification, as well as the total percentil
 \dontrun{
 path_lattes <- paste0(system.file("lattes", package = "NUPEX"),
                       "/lattes2.xml")
-lattes_data <- get_lattes_folder(path_lattes)
+lattes_data <- get_lattes(path_lattes)
 lpapers <- listpapers(lattes_data,
                       capesdata = capes_qualis,
                       quadre = c(2017, 2020))
-tpapers <- totalpapers(paperdata = lpapers,
+tpapers <- totalpapers(lpapers,
                        lattes_data)
 
 path_lattes_folder <- system.file("lattes", package = "NUPEX")
@@ -47,7 +47,7 @@ lpapers <- listpapers(lattes_folder_data,
                       quadre = c(2017, 2020))
 collaborators <- c("Suzana Telles da Cunha Lima",
                    "ClÃ¡udia Dias de Santana")
-tpapers <- totalpapers(paperdata = lpapers,
+tpapers <- totalpapers(lpapers,
                        lattes_folder_data,
                        collabs = collaborators)
 }

@@ -26,7 +26,7 @@ a tibble obtained using \code{\link{get_lattes}} or \code{\link{get_lattes_folde
 \dontrun{
 path_lattes <- paste0(system.file("lattes", package = "NUPEX"),
                       "/lattes2.xml")
-lattes_data <- get_lattes_folder(path_lattes)
+lattes_data <- get_lattes(path_lattes)
 labst <- listabst(lattes_data,
                   quadre = c(2017, 2020))
 

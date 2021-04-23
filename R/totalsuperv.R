@@ -23,10 +23,10 @@
 #' \dontrun{
 #' path_lattes <- paste0(system.file("lattes", package = "NUPEX"),
 #'                       "/lattes2.xml")
-#' lattes_data <- get_lattes_folder(path_lattes)
+#' lattes_data <- get_lattes(path_lattes)
 #' lsuperv <- listsuperv(lattes_data,
 #'                       quadre = c(2017, 2020))
-#' tsuperv <- totalsuperv(supervdata = lsuperv,
+#' tsuperv <- totalsuperv(lsuperv,
 #'                        lattes_data,
 #'                        collabs = collaborators)
 #'
@@ -36,7 +36,7 @@
 #'                       quadre = c(2017, 2020))
 #' collaborators <- c("Suzana Telles da Cunha Lima",
 #'                    "Cláudia Dias de Santana")
-#' tsuperv <- totalsuperv(supervdata = lsuperv,
+#' tsuperv <- totalsuperv(lsuperv,
 #'                        lattes_folder_data,
 #'                        collabs = collaborators)
 #'}

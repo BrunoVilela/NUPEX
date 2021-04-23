@@ -5,7 +5,7 @@
 #' @description It produces a data frame listing ongoing and finished supervisions,
 #' from a tibble obtained using \code{\link{get_lattes}} or \code{\link{get_lattes_folder}}
 #'
-#' @param nupexfile table (tibble format) derived by \code{\link{get_lattes}} or
+#' @param lattesdata table (tibble format) derived by \code{\link{get_lattes}} or
 #' \code{\link{get_lattes_folder}}, that will be used to extract the list of
 #' supervisions
 #'
@@ -19,7 +19,7 @@
 #' \dontrun{
 #' path_lattes <- paste0(system.file("lattes", package = "NUPEX"),
 #'                       "/lattes2.xml")
-#' lattes_data <- get_lattes_folder(path_lattes)
+#' lattes_data <- get_lattes(path_lattes)
 #' lsuperv <- listsuperv(lattes_data,
 #'                       quadre = c(2017, 2020))
 #'
@@ -35,17 +35,17 @@
 #' @export
 #'
 
-listsuperv <- function(nupexfile,
+listsuperv <- function(lattesdata,
                        quadre = NULL) {
 
   # Loop over each cell to replace blank cells with NA
-  nupexfile$supervision[] <- lapply(nupexfile$supervision, gsub, pattern = "^$", replacement = NA)
-  nupexfile$supervision_ongoing[] <- lapply(nupexfile$supervision_ongoing, gsub, pattern = "^$", replacement = NA)
+  lattesdata$supervision[] <- lapply(lattesdata$supervision, gsub, pattern = "^$", replacement = NA)
+  lattesdata$supervision_ongoing[] <- lapply(lattesdata$supervision_ongoing, gsub, pattern = "^$", replacement = NA)
 
-  superv <- nupexfile[["supervision"]]
+  superv <- lattesdata[["supervision"]]
   # Adding the missing column NOME, when only one Lattes xml file is parsed by get_lattes
   if (names(superv)[1] != "NOME") {
-    superv <- data.frame(NOME = nupexfile$basic$`NOME-COMPLETO`,
+    superv <- data.frame(NOME = lattesdata$basic$`NOME-COMPLETO`,
                          superv)
   }
   superv <- superv %>% mutate_all(as.character) %>%
@@ -54,10 +54,10 @@ listsuperv <- function(nupexfile,
            "NOME.DA.INSTITUICAO","NOME.DO.CURSO","CODIGO.CURSO","FLAG.BOLSA",
            "NOME.DA.AGENCIA","PAIS")
 
-  ongoingsuperv <- nupexfile[["supervision_ongoing"]]
+  ongoingsuperv <- lattesdata[["supervision_ongoing"]]
   # Adding the missing column NOME, when only one Lattes xml file is parsed by get_lattes
   if (names(ongoingsuperv)[1] != "NOME") {
-    ongoingsuperv <- data.frame(NOME = nupexfile$basic$`NOME-COMPLETO`,
+    ongoingsuperv <- data.frame(NOME = lattesdata$basic$`NOME-COMPLETO`,
                                 ongoingsuperv)
   }
   ongoingsuperv <- ongoingsuperv %>% mutate_all(as.character) %>%

@@ -25,10 +25,10 @@
 #' \dontrun{
 #' path_lattes <- paste0(system.file("lattes", package = "NUPEX"),
 #'                       "/lattes2.xml")
-#' lattes_data <- get_lattes_folder(path_lattes)
+#' lattes_data <- get_lattes(path_lattes)
 #' lproj <- listproj(lattes_data,
 #'                   quadre = c(2017, 2020))
-#' tproj <- totalproj(projdata = lproj,
+#' tproj <- totalproj(lproj,
 #'                    lattes_data)
 #'
 #' path_lattes_folder <- system.file("lattes", package = "NUPEX")
@@ -37,7 +37,7 @@
 #'                   quadre = c(2017, 2020))
 #' collaborators <- c("Suzana Telles da Cunha Lima",
 #'                    "Cláudia Dias de Santana")
-#' tproj <- totalproj(projdata = lproj,
+#' tproj <- totalproj(lproj,
 #'                    lattes_folder_data,
 #'                    collabs = collaborators)
 #'}
@@ -120,7 +120,7 @@ totalproj <- function(projdata,
                     projdata_temp[, -c(1:11, length(projdata_temp))])
         if (any(n)) {
 
-          total_inst <- agencies(inst, projdata_temp)
+          total_inst <- .agencies(inst, projdata_temp)
 
           if (any(unlist(total_inst))) {
 
@@ -146,7 +146,7 @@ totalproj <- function(projdata,
 
 
 # Auxiliary function to get the number of funding agencies
-agencies <- function (x, y) {
+.agencies <- function (x, y) {
 
   y <- y[, -c(1:11, length(y))]
 

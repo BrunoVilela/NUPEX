@@ -32,10 +32,10 @@ Fiocruz, NSF, NERC, Royal Society, WHO, FAO, etc)
 \dontrun{
 path_lattes <- paste0(system.file("lattes", package = "NUPEX"),
                       "/lattes2.xml")
-lattes_data <- get_lattes_folder(path_lattes)
+lattes_data <- get_lattes(path_lattes)
 lproj <- listproj(lattes_data,
                   quadre = c(2017, 2020))
-tproj <- totalproj(projdata = lproj,
+tproj <- totalproj(lproj,
                    lattes_data)
 
 path_lattes_folder <- system.file("lattes", package = "NUPEX")
@@ -44,7 +44,7 @@ lproj <- listproj(lattes_folder_data,
                   quadre = c(2017, 2020))
 collaborators <- c("Suzana Telles da Cunha Lima",
                    "ClÃ¡udia Dias de Santana")
-tproj <- totalproj(projdata = lproj,
+tproj <- totalproj(lproj,
                    lattes_folder_data,
                    collabs = collaborators)
 }

@@ -6,7 +6,7 @@
 #' \code{\link{get_lattes_folder}} to produce a data frame listing all graduate
 #' programs where each one contributes with ongoing supervising of MSc or PhD students
 #'
-#' @param nupexfile table (tibble format) derived by \code{\link{get_lattes}} or
+#' @param lattesdata table (tibble format) derived by \code{\link{get_lattes}} or
 #' \code{\link{get_lattes_folder}}, that will be used to extract a list of
 #' ongoing supervisions of MSc or PhD students at different graduate programs
 #'
@@ -21,7 +21,7 @@
 #' \dontrun{
 #' path_lattes <- paste0(system.file("lattes", package = "NUPEX"),
 #'                       "/lattes2.xml")
-#' lattes_data <- get_lattes_folder(path_lattes)
+#' lattes_data <- get_lattes(path_lattes)
 #' ppgs <- ppgsuperv(lattes_data)
 #'
 #' path_lattes_folder <- system.file("lattes", package = "NUPEX")
@@ -39,13 +39,13 @@
 #' @export
 #'
 
-ppgsuperv <- function(nupexfile,
+ppgsuperv <- function(lattesdata,
                       collabs = NULL) {
 
-  IDs <- listID(nupexfile,
+  IDs <- listID(lattesdata,
                 collabs = collabs)
 
-  ongosuperv <- nupexfile[["supervision_ongoing"]]
+  ongosuperv <- lattesdata[["supervision_ongoing"]]
 
   ongosuperv <- ongosuperv %>% mutate_all(as.character) %>%
     filter(NATUREZA == "Tese de doutorado" | NATUREZA == "Dissertação de mestrado") %>%

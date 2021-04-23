@@ -23,7 +23,7 @@
 #' \dontrun{
 #' path_lattes <- paste0(system.file("lattes", package = "NUPEX"),
 #'                       "/lattes2.xml")
-#' lattes_data <- get_lattes_folder(path_lattes)
+#' lattes_data <- get_lattes(path_lattes)
 #' lcompID <- listcompID(lattes_data)
 #'
 #' path_lattes_folder <- system.file("lattes", package = "NUPEX")
@@ -72,15 +72,28 @@ listcompID <- function (lattesdata,
     lcompID$VINCULO[is.na(lcompID$VINCULO)] <- "Permanente"
   }
 
-  addbasic <- lattesdata[["basic"]] %>% select("PAIS-DE-NASCIMENTO",
-                                               "SIGLA-PAIS-NACIONALIDADE",
-                                               "CIDADE-NASCIMENTO")
+  addbasic <- lattesdata[["basic"]]
+  if (names(addbasic)[1] != "NOME") {
+    addbasic <- data.frame(NOME = lattesdata$basic$`NOME-COMPLETO`,
+                           addbasic)
+  }
+  names(addbasic) <- gsub("[-]", ".", names(addbasic))
+  addbasic <- addbasic %>% select("NOME",
+                                  "PAIS.DE.NASCIMENTO",
+                                  "SIGLA.PAIS.NACIONALIDADE",
+                                  "CIDADE.NASCIMENTO")
 
   lattesdata$address[] <- lapply(lattesdata$address, gsub, pattern = "^$", replacement = NA)
   address <- lattesdata[["address"]]
   names(address) <- gsub("ENDERECO[.]PROFISSIONAL[.]|[.]EMPRESA|[.]COMPLEMENTO", "", names(address))
 
-  address <- address %>% select("NOME.INSTITUICAO",
+  if (names(address)[1] != "NOME") {
+    address <- data.frame(NOME = lattesdata$basic$`NOME-COMPLETO`,
+                          address)
+  }
+
+  address <- address %>% select("NOME",
+                                "NOME.INSTITUICAO",
                                 "NOME.ORGAO",
                                 "LOGRADOURO",
                                 "CEP",
@@ -102,6 +115,34 @@ listcompID <- function (lattesdata,
 
   edu <- edu %>% filter(NIVEL == "4")
   names(edu) <- gsub("[-]", ".", names(edu))
+
+  dup <- duplicated(edu$NOME)
+  if (any(dup)) {
+    g <- edu$NOME %in% edu$NOME[dup][1]
+    temp <- edu[g, ]
+    temp <- temp %>% filter(ANO.DE.CONCLUSAO == max(temp$ANO.DE.CONCLUSAO))
+
+    for (i in 2:length(edu$NOME[dup])) {
+      g <- edu$NOME %in% edu$NOME[dup][i]
+      addtemp <- edu[g, ]
+      addtemp <- addtemp %>% filter(ANO.DE.CONCLUSAO == max(addtemp$ANO.DE.CONCLUSAO))
+
+      temp <- rbind(temp, addtemp)
+    }
+
+    edu <- edu[!edu$NOME %in% edu$NOME[dup], ]
+    edu <- rbind(edu, temp)
+    edu <- edu %>% arrange(NOME)
+
+    lcompID <- lcompID %>% arrange(NOME)
+    addbasic <- addbasic %>% arrange(NOME)
+    addbasic <- addbasic[, -1]
+    address <- address %>% arrange(NOME)
+    address <- address[, -1]
+  } else {
+    addbasic <- addbasic[, -1]
+    address <- address[, -1]
+  }
 
   edu <- edu %>% select("NOME",
                         "NOME.CURSO",

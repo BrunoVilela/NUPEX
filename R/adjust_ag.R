@@ -17,74 +17,55 @@ adjust_ag <- function(x) {
 
   x$NOME.AGENCIA <- gsub("^$", NA, x$NOME.AGENCIA)
 
-  x$NOME.AGENCIA[x$NOME.AGENCIA ==
-                      "Coordenação de Aperfeiçoamento de Pessoal de Nível Superior"] <- "CAPES"
-  x$NOME.AGENCIA[x$NOME.AGENCIA ==
-                      "Conselho Nacional de Desenvolvimento Científico e Tecnológico"] <- "CNPq"
-  x$NOME.AGENCIA[x$NOME.AGENCIA ==
-                      "(CNPq) Conselho Nacional de Desenvolvimento Científico e Tecnológico"] <- "CNPq"
+  agenc_out <- c("FAPEAM|Fundação de Amparo [aà] Pesquisa do Estado do Amazonas",
+                 "FAPEAP|Fundação de Amparo [aà] Pesquisa do Amapá",
+                 "FAPESPA|Fundação Amazônia Paraense de Amparo [aà] Pesquisa",
+                 "FAPERO|Fundação de Amparo [aà] Pesquisa do Estado de Rondônia",
+                 "FAPERR|Fundação de Amparo [aà] Pesquisa do Estado de Roraima",
+                 "FAPESB|Fundação de Amparo [aà] Pesquisa do Estado da Bahia",
+                 "FACEPE|Fundação de Amparo [aà] Ci[eê]ncia e Tecnologia do Estado de Pernambuco",
+                 "FAPEAL|Fundação de Amparo [aà] Pesquisa do Estado de Alagoas",
+                 "FUNCAP|Fundação Cearense de Apoio ao Desenvolvimento Científico e Tecnológico",
+                 "FAPEMA|Fundação de Amparo [aà] Pesquisa ao Desenvolv. Científico e Tecnológico - MA|Fundação de Amparo [aà] Pesquisa e ao Desenvolvimento Científico e Tecnológico do Maranhão",
+                 "FAPESQ|Fundação de Apoio [aà] Pesquisa do Estado da Paraíba",
+                 "FAPEPI|Fundação de Amparo [aà] Pesquisa do Estado do Piauí",
+                 "FAPERN|Fundação de Apoio [aà] Pesquisa do Estado do Rio Grande do Norte",
+                 "FAPITEC|Fundação de Apoio [aà] Pesquisa e [aà] Inovação Tecnológica do Estado de Sergipe",
+                 "FUNDECT|Fundação de Apoio e Desenvolvimento do Ensino, Ciência e Tecnologia do MS|Fundação de Apoio ao Desenvolvimento do Ensino, Ciência e Tecnologia do Estado de Mato Grosso do Sul",
+                 "FAPEG|Fundação de Amparo [aà] Pesquisa do Estado de Goiás",
+                 "FAPEMAT|Fundação de Amparo [aà] Pesquisa do Estado de Mato Grosso",
+                 "FAPT|Fundação de Amparo [aà] Pesquisa do Estado do Tocantins",
+                 "Fundação de Amparo [aà] Pesquisa do Espírito Santo",
+                 "FAPEMIG|fapemig|Fundação de Amparo [aà] Pesquisa do Estado de Minas Gerais",
+                 "FAPESP|Fundação de Amparo [aà] Pesquisa do Estado de São Paulo",
+                 "FAPERJ|Fundação Carlos Chagas Filho de Amparo|Fundação de Amparo [aà] Pesquisa do Estado do Rio de Janeiro",
+                 "FAPERGS|Fundação de Amparo [aà] Pesquisa do Estado do Rio Grande do Sul",
+                 "FAPESC|Fundação de Amparo [aà] Pesquisa e Inovação de Santa Catarina",
+                 "Fundação Araucária|Fundação Araucária de Apoio ao Desenvolvimento Científico e Tecnológico do Estado do Paraná",
+                 "CAPES|Coordenação de Aperfeiçoamento de Pessoal de Nível Superior",
+                 "CNPq|Conselho Nacional de Desenvolvimento Científico e Tecnológico",
+                 "Fiocruz|FIOCRUZ",
+                 "UFBA|Universidade Federal da Bahia",
+                 "UEFS|Universidade Estadual de Feira de Santana",
+                 "UESC|Universidade Estadual de Santa Cruz",
+                 "UFMG|Ufmg|Universidade Federal de Minas Gerais",
+                 "USP|Universidade do Estado de São Paulo",
+                 "UFRJ|Universidade Federal do Rio de Janeiro",
+                 "UFPE|Universidade Federal de Pernambuco")
 
-  # NORTE
-  x$NOME.AGENCIA[x$NOME.AGENCIA ==
-                      "Fundação de Amparo à Pesquisa do Estado do Amazonas"] <- "FAPEAM"
-  x$NOME.AGENCIA[x$NOME.AGENCIA ==
-                      "Fundação de Amparo à Pesquisa do Amapá"] <- "FAPEAP"
-  x$NOME.AGENCIA[x$NOME.AGENCIA ==
-                      "Fundação Amazônia Paraense de Amparo à Pesquisa"] <- "FAPESPA"
-  x$NOME.AGENCIA[x$NOME.AGENCIA ==
-                      "Fundação de Amparo à Pesquisa do Estado de Rondônia"] <- "FAPERO"
-  x$NOME.AGENCIA[x$NOME.AGENCIA ==
-                      "Fundação de Amparo à Pesquisa do Estado de Roraima"] <- "FAPERR"
+  agenc_in <- gsub("[|].*", "", agenc_out)
+  agenc_in <- gsub(".*Espírito Santo", "FAPES", agenc_in)
+  agenc_in <- gsub("Fundação Araucária.*", "FA", agenc_in)
 
-  # NORDESTE
-  x$NOME.AGENCIA[x$NOME.AGENCIA ==
-                      "Fundação de Amparo à Pesquisa do Estado de Alagoas"] <- "FAPEAL"
-  x$NOME.AGENCIA[x$NOME.AGENCIA ==
-                      "Fundação de Amparo à Pesquisa do Estado da Bahia"] <- "FAPESB"
-  x$NOME.AGENCIA[x$NOME.AGENCIA ==
-                      "Fundação de Amparo à Pesquisa ao Desenvolv. Científico e Tecnológico - MA"] <- "FAPEMA"
-  x$NOME.AGENCIA[x$NOME.AGENCIA ==
-                      "Fundação de Amparo à Pesquisa e ao Desenvolvimento Científico e Tecnológico do Maranhão"] <- "FAPEMA"
-  x$NOME.AGENCIA[x$NOME.AGENCIA ==
-                      "Fundação de Apoio à Pesquisa do Estado da Paraíba"] <- "FAPESQ"
-  x$NOME.AGENCIA[x$NOME.AGENCIA ==
-                      "Fundação de Amparo à Ciência e Tecnologia do Estado de Pernambuco"] <- "FACEPE"
-  x$NOME.AGENCIA[x$NOME.AGENCIA ==
-                      "Fundação de Amparo à Pesquisa do Estado do Piauí"] <- "FAPEPI"
-  x$NOME.AGENCIA[x$NOME.AGENCIA ==
-                      "Fundação de Apoio à Pesquisa do Estado do Rio Grande do Norte"] <- "FAPERN"
-  x$NOME.AGENCIA[x$NOME.AGENCIA ==
-                      "Fundação de Apoio à Pesquisa e a Inovação Tecnológica do Estado de Sergipe"] <- "FAPITEC"
+  for (i in seq_along(agenc_out)) {
 
-  # SUL
-  x$NOME.AGENCIA[x$NOME.AGENCIA ==
-                      "Fundação de Amparo à Pesquisa do Estado do Rio Grande do Sul"] <- "FAPERGS"
-  x$NOME.AGENCIA[x$NOME.AGENCIA ==
-                      "Fundação de Amparo à Pesquisa e Inovação de Santa Catarina"] <- "FAPESC"
-  x$NOME.AGENCIA[x$NOME.AGENCIA ==
-                      "Fundação Araucária de Apoio ao Desenvolvimento Científico e Tecnológico do Estado do Paraná"] <- "FA"
+    g <- grepl(agenc_out[i], x$NOME.AGENCIA)
 
-  # SUDESTE
-  x$NOME.AGENCIA[x$NOME.AGENCIA ==
-                      "Fundação de Amparo à Pesquisa do Espírito Santo"] <- "FAPES"
-  x$NOME.AGENCIA[x$NOME.AGENCIA ==
-                      "Fundação de Amparo à Pesquisa do Estado de Minas Gerais"] <- "FAPEMIG"
-  x$NOME.AGENCIA[x$NOME.AGENCIA ==
-                      "fapemig"] <- "FAPEMIG"
-  x$NOME.AGENCIA[x$NOME.AGENCIA ==
-                      "Fundação de Amparo à Pesquisa do Estado de São Paulo"] <- "FAPESP"
-  x$NOME.AGENCIA[x$NOME.AGENCIA ==
-                      "Fundação de Amparo à Pesquisa do Estado do Rio de Janeiro"] <- "FAPERJ"
+    if (any(g)) {
+      x$NOME.AGENCIA[g] <- agenc_in[i]
+    }
 
-  # CENTRO-OESTE
-  x$NOME.AGENCIA[x$NOME.AGENCIA ==
-                      "Fundação de Amparo à Pesquisa do Estado de Goiás"] <- "FAPEG"
-  x$NOME.AGENCIA[x$NOME.AGENCIA ==
-                      "Fundação de Amparo à Pesquisa do Estado de Mato Grosso"] <- "FAPEMAT"
-  x$NOME.AGENCIA[x$NOME.AGENCIA ==
-                      "Fundação de Apoio ao Desenvolvimento do Ensino, Ciência e Tecnologia do Estado de Mato Grosso do Sul"] <- "FUNDECT"
-  x$NOME.AGENCIA[x$NOME.AGENCIA ==
-                      "Fundação de Amparo à Pesquisa do Estado do Tocantins"] <- "FAPT"
+  }
 
   return(x)
 

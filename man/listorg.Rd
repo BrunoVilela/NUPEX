@@ -27,7 +27,7 @@ or \code{\link{get_lattes_folder}}
 \dontrun{
 path_lattes <- paste0(system.file("lattes", package = "NUPEX"),
                       "/lattes2.xml")
-lattes_data <- get_lattes_folder(path_lattes)
+lattes_data <- get_lattes(path_lattes)
 lorg <- listorg(lattes_data
                 quadre = c(2017, 2020))
 

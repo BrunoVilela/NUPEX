@@ -4,10 +4,10 @@
 \alias{listsuperv}
 \title{Produce list of supervisions}
 \usage{
-listsuperv(nupexfile, quadre = NULL)
+listsuperv(lattesdata, quadre = NULL)
 }
 \arguments{
-\item{nupexfile}{table (tibble format) derived by \code{\link{get_lattes}} or
+\item{lattesdata}{table (tibble format) derived by \code{\link{get_lattes}} or
 \code{\link{get_lattes_folder}}, that will be used to extract the list of
 supervisions}
 
@@ -26,7 +26,7 @@ from a tibble obtained using \code{\link{get_lattes}} or \code{\link{get_lattes_
 \dontrun{
 path_lattes <- paste0(system.file("lattes", package = "NUPEX"),
                       "/lattes2.xml")
-lattes_data <- get_lattes_folder(path_lattes)
+lattes_data <- get_lattes(path_lattes)
 lsuperv <- listsuperv(lattes_data,
                       quadre = c(2017, 2020))
 
